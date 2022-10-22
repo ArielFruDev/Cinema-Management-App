@@ -1,0 +1,7 @@
+להכניס ביוזר מנגמנט שני נתיבים של אד יוזר ויוזרס ולהכניס אאוטלט בתוך הקומפוננטה
+לבנות את הלוגיקה של הכפתורים עם נאביגייט
+לדאוג שיהיה רינדור של קומפוננטת יוזר עם פרופס
+בתוך הקומפוננטה של כל יוזר לבנות גיקה של הכפורים בפנים
+******
+remove the logic of 'addUserToFile' to the back. 
+I should pay attention that every function that changes the DB/files make dispatch. or check redux-saga.
