@@ -13,7 +13,7 @@ const SubscriptionDetails = ({subscription}) => {
         <ul>{subscription.movies?.map(movie => {
             const id = movie._id
             const selectedMovie = movies.find(mov => mov._id === id)
-            return <li><Link to={'/main/movies/allMovies'}>{selectedMovie.name}</Link>,  {movie.date}</li>
+            return <li><Link to={'/main/movies/allMovies'} state={{movieName: selectedMovie.name}}>{selectedMovie.name}</Link>,  {movie.date}</li>
         })}</ul>
     </div>
   )

@@ -8,7 +8,7 @@ const Movies = () => {
       const navigate = useNavigate()
 
       useEffect(() => {
-        const defaultPage = () => {navigate('/main/movies/allMovies')}
+        const defaultPage = () => {navigate('/main/movies/allMovies',{state:{movieName: ""}})}
         defaultPage()
       }, [])
       
@@ -18,7 +18,7 @@ const Movies = () => {
     return <div>
         <h1>Movies</h1> 
 
-        <button onClick={() => {navigate("/main/movies/allMovies")}}>All Movies</button>
+        <button onClick={() => {navigate("/main/movies/allMovies",{state:{movieName: ""}})}}>All Movies</button>
         {userPermissions.includes("Create Movies") && <button onClick={() => {navigate("/main/movies/addMovie")}}>Add Movie</button>}
        <br /><br /><br />
         <Outlet/>

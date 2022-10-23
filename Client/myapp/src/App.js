@@ -36,7 +36,7 @@ function App() {
     const getMovies = async() => {
       // debugger
       const allMovies = await getAllMovies()
-      console.log(allMovies);
+      // console.log(allMovies);
       dispatch(setAllMovies(allMovies))
     }
     getMovies()
