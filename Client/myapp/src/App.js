@@ -30,6 +30,8 @@ function App() {
   
   const dispatch = useDispatch()
 
+  //consider add date logic for sessionStorage when mount the app, to avoid code duplicate..
+
 
   useEffect(()=>{
     //get Movies
