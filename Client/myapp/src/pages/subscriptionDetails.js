@@ -14,15 +14,12 @@ const SubscriptionDetails = ({subscription}) => {
     useEffect(() => {
       const setMoviesToSubscribe = () => {
         const subscribedMoviesNames = subscription.movies?.map(movie => {
-          const id = movie._id
-          const movieName = movies.find(mov => mov._id === id).name
+          const id = movie.movieId
+          const movieName = movies.find(movie => movie._id === id).name
           return movieName
         })
-        const moviesNames = movies.map(movie => {
-          const id = movie._id
-          const movieName = movies.find(mov => mov._id === id).name
-          return movieName
-        })
+        // console.log(subscribedMoviesNames);
+        const moviesNames = movies.map(movie => movie.name)
         const unwatchedMovies = moviesNames.filter(movie => !subscribedMoviesNames?.includes(movie))
         setUnwatched(unwatchedMovies)
       }
@@ -51,8 +48,8 @@ const SubscriptionDetails = ({subscription}) => {
     <div style={{border: '3px solid black'}}>
         <h5>Movies Subscribed</h5>
         <ul>{subscription.movies?.map(movie => {
-          const id = movie._id
-          const selectedMovie = movies.find(mov => mov._id === id)
+          const id = movie.movieId
+          const selectedMovie = movies.find(movie => movie._id === id)
           return <li><Link to={'/main/movies/allMovies'} state={{movieName: selectedMovie.name}}>{selectedMovie.name}</Link>,  {movie.date}</li>
         })}</ul>
         <button onClick={() => {setMovieSubscriptionDiv(!movieSubscriptionDiv)}}>subscribe to new movie</button>
@@ -62,3 +59,35 @@ const SubscriptionDetails = ({subscription}) => {
 }
 
 export default SubscriptionDetails
+
+
+// [
+//   {
+//       "memberId": "62c30d32cdfc88fb3e8d5684",
+//       "movies": [
+//           {
+//               "movieId": "630bc7efb4467cc6b91e06ae",
+//               "date": "01/05/2022"
+//           }
+//         ]
+//   },
+//   {
+//       "memberId": "62c30d32cdfc88fb3e8d5685",
+//       "movies": [
+//           {
+//               "movieId": "630bc7eeb4467cc6b91e06ad",
+//               "date": "02/05/2022",
+//           }
+//       ]
+//   },
+//   {
+//       "_id": "6355dd254437a26422547601",
+//       "memberId": "62c30d32cdfc88fb3e8d5689",
+//       "movies": [
+//           {
+//               "movieId": "630bc7efb4467cc6b91e06b3",
+//               "date": "03/05/2022",
+//           }
+//       ]
+//     }
+// ]
