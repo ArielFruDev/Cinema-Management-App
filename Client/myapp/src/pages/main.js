@@ -17,7 +17,7 @@ const Main = () => {
           paddingBottom: "1rem",
         }}
       >
-        {userPermissions.includes("View Movies") && <Button variant="primary" onClick={()=>{navigate('/main/movies',{state:{movieName: "ooko"}});}}>Movies</Button>}{' '}
+        {userPermissions.includes("View Movies") && <Button variant="primary" onClick={()=>{navigate('/main/movies')}}>Movies</Button>}{' '}
         <Button variant="primary" onClick={()=>{navigate('/main/subscriptions')}}>Subscriptions</Button>{' '}
         {loggedUser.userName === "Avi Cohen" && <Button variant="primary" onClick={()=>{navigate('/main/userManagment')}}>Users Managment</Button>}{' '} 
         <Button variant="primary" onClick={()=>{navigate('/')}}>Log Out</Button>{' '}

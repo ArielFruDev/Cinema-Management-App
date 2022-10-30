@@ -5,6 +5,8 @@ import { useEffect } from "react";
 
 const Movies = () => {
 
+  //fix issue: when rendered after rendering from "subscriptionDetails", it deosn't render "allMovies" as expected.
+
       const navigate = useNavigate()
 
       useEffect(() => {
