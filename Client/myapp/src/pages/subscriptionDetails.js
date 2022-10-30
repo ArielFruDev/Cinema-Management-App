@@ -1,15 +1,19 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import { AddMovieOrCreateSubscription } from '../utils/subscriptionsUtils'
+import { setAllSubscriptions } from '../Redux/actions'
 const SubscriptionDetails = ({subscription}) => {
 
     const movies = useSelector(state => state.movies)
+    const CurrentSubscription = useSelector(state => state.subscriptions[subscription._id])
+    const dispatch = useDispatch()
 
     const [movieSubscriptionDiv, setMovieSubscriptionDiv] = useState(false)
     const [unwatched, setUnwatched] = useState([])
+    const [movieId, setMovieId] = useState("")
 
     useEffect(() => {
       const setMoviesToSubscribe = () => {
@@ -18,29 +22,37 @@ const SubscriptionDetails = ({subscription}) => {
           const movieName = movies.find(movie => movie._id === id).name
           return movieName
         })
-        // console.log(subscribedMoviesNames);
-        const moviesNames = movies.map(movie => movie.name)
-        const unwatchedMovies = moviesNames.filter(movie => !subscribedMoviesNames?.includes(movie))
+        // const moviesNames = movies.map(movie => movie.name)
+        const unwatchedMovies = movies.filter(movie => !subscribedMoviesNames?.includes(movie.name))
         setUnwatched(unwatchedMovies)
+        setMovieId(unwatched[0]?._id)
       }
       setMoviesToSubscribe()
-    },[subscription])
+    },[CurrentSubscription, subscription])
 
     const date = new Date()
     const set2Digits = (num) => {return num.toString().padStart(2, '0')}
     const currentDate = `${set2Digits(date.getDate())}/${set2Digits(date.getMonth() + 1)}/${date.getFullYear()}`
+
+    const addNewMovie = async() => {
+      const newMovie = {
+        movieId: movieId,
+        date: currentDate
+      }
+      const newSubscriptionsList = await AddMovieOrCreateSubscription(subscription.memberId, newMovie)
+      dispatch(setAllSubscriptions(newSubscriptionsList))
+    }
     
     
     const subscriptionDivToRender = <div style={{border: '2px solid black'}}>
       <h6>Add a new movie</h6>
-      Movie: <select name="" id="">
+      Movie: <select name="" id="" onClick={(event) => {setMovieId(event.target.value)}}>
         {unwatched.map(movie => {
-
-          return <option value={movie}>{movie}</option>
+          return <option value={movie._id}>{movie.name}</option>
         })}
       </select>
       Date: <input type="text" value={currentDate}/> <br />
-      <button onClick={() => {console.log(unwatched);}}>subscribe</button>
+      <button onClick={() => {addNewMovie()}}>subscribe</button>
     </div>
 
 
@@ -61,33 +73,3 @@ const SubscriptionDetails = ({subscription}) => {
 export default SubscriptionDetails
 
 
-// [
-//   {
-//       "memberId": "62c30d32cdfc88fb3e8d5684",
-//       "movies": [
-//           {
-//               "movieId": "630bc7efb4467cc6b91e06ae",
-//               "date": "01/05/2022"
-//           }
-//         ]
-//   },
-//   {
-//       "memberId": "62c30d32cdfc88fb3e8d5685",
-//       "movies": [
-//           {
-//               "movieId": "630bc7eeb4467cc6b91e06ad",
-//               "date": "02/05/2022",
-//           }
-//       ]
-//   },
-//   {
-//       "_id": "6355dd254437a26422547601",
-//       "memberId": "62c30d32cdfc88fb3e8d5689",
-//       "movies": [
-//           {
-//               "movieId": "630bc7efb4467cc6b91e06b3",
-//               "date": "03/05/2022",
-//           }
-//       ]
-//     }
-// ]

@@ -80,14 +80,14 @@ const getSubscriptionById = async(id) => {
 
 const createSubscription = async(obj) => {
     const resp = await axios.post(`http://localhost:8000/subscriptions`, obj)
-    const subscription = resp.data
-    return(`New subscription created! ID: ${subscription._id}`)
+    const subscriptions = resp.data
+    return(subscriptions)
 }
 
 const updateSubscription = async(id, obj) => {
     const resp = await axios.put(`http://localhost:8000/subscriptions/${id}`, obj)
-    const subscription = resp.data
-    return(subscription)
+    const subscriptions = resp.data
+    return(subscriptions)
 }
 
 const deleteSubscription = async(id) => {

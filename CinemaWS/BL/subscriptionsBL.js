@@ -82,14 +82,34 @@ const getAllSubscriptions = async() => {
  }
  
  const createSubscription = async(obj) => {
+   console.log(obj);
      const status = await subDAL.createSubscription(obj)
      return (status)
   }
 
- const addMovieToSubscription = async(id, obj) => {
-    const sub = await subDAL.getSubscriptionById(id)
-    sub.movies.push(obj)
-    const newSub = await subDAL.updateSubscription(id, sub)
+ const addMovieToSubscription = async(memberId, obj) => {
+    const sub = await getSubscriptionByMemberId(memberId)
+    if (sub) {
+      // const newSub = ""
+       sub.movies.push(obj)
+      //  console.log(sub);
+      //  const jsonSub = JSON.stringify(sub)
+       const subscriptions = await subDAL.updateSubscription(memberId, sub)
+   //     console.log("there is subscription. output:");
+   //  console.log(subscriptions);
+       return subscriptions
+    } else {
+      const newSubscription = {
+         memberId: memberId,
+         movies: [
+            obj
+         ]
+      }
+       console.log(newSubscription);
+      const subscriptions = await subDAL.createSubscription(newSubscription)
+      // console.log("no subscription. output:");
+      // return subscriptions
+    }
  }
  
  const updateSubscription = async(id, obj) => {

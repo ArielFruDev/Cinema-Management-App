@@ -115,7 +115,7 @@ router.put('/subscriptions/:id', async(req, resp) => {
     return resp.json(subscription)
 })
 
-router.put('/subscriptions/:id', async(req, resp) => {
+router.put('/subscriptions/addMovie/:id', async(req, resp) => {
     const id = req.params.id
     const obj = req.body
     const subscription = await subBL.addMovieToSubscription(id, obj)

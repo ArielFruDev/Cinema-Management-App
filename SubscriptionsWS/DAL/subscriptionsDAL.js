@@ -36,7 +36,7 @@ const createSubscription = (obj)=> {
             if (err) {
                 reject(err)
             } else {
-                resolve(`New subscription created! ID: ${subscription._id}`)
+                resolve(getAllSubscriptions())
             }
         })
     })
@@ -44,11 +44,11 @@ const createSubscription = (obj)=> {
 
 const updateSubscription = (id, obj) => {
     return new Promise((resolve, reject) => {
-        subscriptionsModel.findByIdAndUpdate(id, obj, (err)=>{
+        subscriptionsModel.findByIdAndUpdate(obj._id, obj, (err)=>{
             if (err) {
                 reject(err)
             } else {
-                resolve(obj)
+                resolve(getAllSubscriptions())
             }
         })
     })

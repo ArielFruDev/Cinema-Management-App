@@ -11,6 +11,9 @@ import SubscriptionDetails from './subscriptionDetails'
 
 const Member = ({member}) => {
 
+    const userPermissions = JSON.parse(sessionStorage.getItem("permissions"))
+    const subscriptions = useSelector(state => state.subscriptions)
+
     const [subscription, setSubscription] = useState({})
 
     useEffect(() => {
@@ -19,14 +22,12 @@ const Member = ({member}) => {
             setSubscription(sub)
         }
         findSubscription()
-    }, [])
+    }, [subscriptions])
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
 
-    const userPermissions = JSON.parse(sessionStorage.getItem("permissions"))
-    const subscriptions = useSelector(state => state.subscriptions)
 
     const removeMember = async(id) => {
         const members = await deleteMember(id)

@@ -18,15 +18,15 @@ router.get('/:id', async(req, resp)=>{
 
 router.post('/', async(req, resp) => {
     const obj = req.body
-    const status = await subscriptionsBL.create(obj)
-    return resp.json(status)
+    const subscriptions = await subscriptionsBL.create(obj)
+    return resp.json(subscriptions)
 })
 
-router.put('/:id', (req, resp)=>{
+router.put('/:id', async(req, resp)=>{
     const id = req.params.id
     const obj = req.body
-    const updatedSubscription = subscriptionsBL.update(id, obj)
-    resp.json(updatedSubscription)
+    const subscriptions = await subscriptionsBL.update(id, obj)
+    return resp.json(subscriptions)
 })
 router.delete('/:id', async(req, resp)=>{
     const id = req.params.id

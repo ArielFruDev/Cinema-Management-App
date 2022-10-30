@@ -12,19 +12,23 @@ const getById = async(id)=>{
 }
 
 const create = async(obj) => {
-    const status = await subscriptionsDAL.createSubscription(obj)
-    return status
+    const subscriptions = await subscriptionsDAL.createSubscription(obj)
+    return subscriptions
 }
 
 const update = async(id, obj) => {
-    const updatedSubscription = await subscriptionsDAL.updateSubscription(id, obj)
-    return updatedSubscription
+    const subscriptions = await subscriptionsDAL.updateSubscription(id, obj)
+    return subscriptions
 }
 
 const remove = async(id)=>{
     const status = await subscriptionsDAL.deleteSubscription(id)
     return(status)
 }
+
+// const addMovie = async(id) => {
+//     const subscription = 
+// }
 
 
 module.exports = {getAll, getById, create, update, remove}

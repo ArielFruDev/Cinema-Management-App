@@ -12,5 +12,11 @@ const getSubscriptionByMemberId = async(id) => {
     return subscription
 } 
 
+const AddMovieOrCreateSubscription = async(memberId, obj) => {
+    const resp = await axios.put(`http://localhost:8001/subs/subscriptions/addMovie/${memberId}`, obj)
+    const subscriptions  = resp.data
+    return subscriptions
+}
 
-export {getAllSubscriptions, getSubscriptionByMemberId}
+
+export {getAllSubscriptions, getSubscriptionByMemberId, AddMovieOrCreateSubscription}
