@@ -26,10 +26,10 @@ router.post('/', async(req, resp) => {
     return resp.json(members)
 })
 
-router.put('/:id', (req, resp)=>{
+router.put('/:id', async(req, resp)=>{
     const id = req.params.id
     const obj = req.body
-    const members = membersBL.update(id, obj)
+    const members = await membersBL.update(id, obj)
     resp.json(members)
 })
 router.delete('/:id', async(req, resp)=>{

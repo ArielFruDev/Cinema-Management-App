@@ -48,7 +48,7 @@ const Member = ({member}) => {
 
         {/* build here logic for "movies watched" */}
         {subDetails} <br />
-        {userPermissions.includes("Update Subscriptions") && <button onClick={() => {navigate('/main/subscriptions/editMember')}}>Edit</button>}
+        {userPermissions.includes("Update Subscriptions") && <button onClick={() => {navigate('/main/subscriptions/editMember',{state:{member: member}})}}>Edit</button>}
         {userPermissions.includes("Delete Subscriptions") && <button onClick={() => {removeMember(member._id)}}>Delete</button>}
     </div>
   )
