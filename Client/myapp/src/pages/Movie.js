@@ -1,13 +1,15 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { deleteMovie } from '../utils/moviesUtils'
 import { setAllMovies } from '../Redux/actions'
+import MovieSubscriptions from './movieSubscriptions'
 
 const Movie = ({movie}) => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const subscriptions = useSelector(state => state.subscriptions)
 
   const userPermissions = JSON.parse(sessionStorage.getItem("permissions"))
 
@@ -25,7 +27,8 @@ const Movie = ({movie}) => {
             return genre + ',' + '         '})} <br />
             <div>
               <img style={{height: '80px'}} src={movie.image} alt="movie img" /> <br /><br />
-              <div style={{border: '3px solid black'}}>subscriptions watched this: </div> <br /><br />
+              <MovieSubscriptions movieId={movie._id}/>
+               <br /><br />
 
             </div>
 

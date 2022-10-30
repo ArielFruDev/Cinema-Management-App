@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import Member from './member'
 
 const AllMembers = () => {
 
     const members = useSelector(state => state.members)
+    const location = useLocation()
 
     const [searchLetters, setSearchLetters] = useState('')
+
+    useEffect(()=>{
+      const memberName = location.state.memberName
+      setSearchLetters(memberName)
+    },[])
 
     const membersToRender = members.map((member, index) => {
         return <div>
