@@ -19,6 +19,6 @@ app.use('/movies', moviesRouter);
 
 app.listen(8000, (req, res) => {
     console.log('server 8000 is listening');
-    membersBL.pushUsersToMongo(); //<- activate only once, if data has not inserted yet.
-    moviesBL.pushShowsToMongo(); // <- activate only once, if data has not inserted yet.
+    // membersBL.pushUsersToMongo(); //<- activate only once, if data has not inserted yet.
+    // moviesBL.pushShowsToMongo(); // <- activate only once, if data has not inserted yet.
 });
