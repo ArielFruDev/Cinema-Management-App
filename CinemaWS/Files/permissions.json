@@ -13,7 +13,6 @@
                 "Update Movies"
             ]
         },
-        { "_id": "62f96e5c865adfbae19b7139", "permissions": ["View Subscriptions", "Create Subscriptions", "View Movies"] },
         {
             "_id": "633f13afc3917ec99a2380a7",
             "permissions": [
@@ -22,6 +21,19 @@
                 "Delete Subscriptions",
                 "Update Subscriptions",
                 "View Movies"
+            ]
+        },
+        {
+            "_id": "66fbe8680a4d940ac0e23f92",
+            "permissions": [
+                "View Subscriptions",
+                "Create Subscriptions",
+                "Delete Subscriptions",
+                "Update Subscriptions",
+                "View Movies",
+                "Create Movies",
+                "Delete Movies",
+                "Update Movies"
             ]
         }
     ]
