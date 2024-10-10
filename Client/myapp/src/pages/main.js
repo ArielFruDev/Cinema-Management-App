@@ -34,7 +34,7 @@ const Main = () => {
                 >
                     Subscriptions
                 </Button>{' '}
-                {loggedUser.userName === 'arielf' && (
+                {loggedUser.userName === 'admin' && (
                     <Button
                         variant="primary"
                         onClick={() => {
