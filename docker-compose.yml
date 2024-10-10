@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+    cinema-web-service:
+        build:
+            context: ./cinemaWS
+            dockerfile: Dockerfile
+        ports:
+            - '8001:5000' # Maps host port 3001 to container port 3000
+        environment:
+            - MONGODB_URI=mongodb://mongodb:27017/usersDB
+        depends_on:
+            - mongodb
+        networks:
+            - app-network
+
+    subscriptions-web-service:
+        build:
+            context: ./SubscriptionsWS
+            dockerfile: Dockerfile
+        ports:
+            - '8000:5000' # Maps host port 3002 to container port 3000
+        environment:
+            - MONGODB_URI=mongodb://mongodb:27017/subscriptionDB
+        depends_on:
+            - mongodb
+        networks:
+            - app-network
+
+    # Single MongoDB Instance
+    mongodb:
+        image: mongo:latest
+        container_name: cinema-project-mongodb
+        volumes:
+            - dbdata:/data/db
+        ports:
+            - '27018:27017'
+        networks:
+            - app-network
+
+    # React App
+    react-app:
+        build:
+            context: ./Client/myapp
+            dockerfile: Dockerfile
+        ports:
+            - '3000:3000' # Maps host port 3000 to container port 3000
+        depends_on:
+            - cinema-web-service
+            - subscriptions-web-service
+        networks:
+            - app-network
+        environment:
+            - CI=true
+            - REACT_APP_CinemaWS_URL=http://localhost:8001
+            - REACT_APP_SubscriptionsWS_URL=http://localhost:8000
+
+# Define volumes for MongoDB data persistence
+volumes:
+    dbdata:
+
+# Define a common network for the containers
+networks:
+    app-network:
+        driver: bridge
